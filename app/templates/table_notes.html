@@ -1,0 +1,38 @@
+<div class="col-xl-6">
+    <h3>Account Followup:</h3>
+    <span class="table_toggle click_link">(Toggle Table Display)</span>
+</div>
+
+<div class="col-xl-6">
+    <button class="btn btn-view modal_navigate" value="create_followup" style="float: right;">Create Followup</button>
+</div>
+
+<div class="col-xl-12 mt-5 mb-5 cell" id="table_display" style="display: none;">
+    <table class="table table-sm" id="table_id">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Call Type</th>
+            <th>Entered By</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for test in data %}
+        <tr>
+            <td>{{test[0]}}</td>
+            <td>{{test[1]}}</td>
+            <td>{{test[2]}}</td>
+            <td><button class="btn btn-sm btn-view modal_navigate" name="" value="view_followup" type="button" style="float: right;">View Followup</button></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+$(document).ready(function() {
+    $("#table_id").DataTable();
+    table_toggle ("table_toggle", "table_display")
+    modal_navigate();
+});
+</script>

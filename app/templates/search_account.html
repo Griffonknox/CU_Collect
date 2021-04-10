@@ -1,0 +1,79 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="row mt-3 mb-5">
+        <div class="col-xl-12">
+            <div class="text-center">
+                <span style="font-size: 30px; color: red;">{{message}}</span>
+            </div>
+        </div>
+                <!-- ALERT Modal -->
+        <div id="alertModal" class="modal">
+            <div class="modal-content">
+                    {% include "alert_popup.html" %}
+            </div>
+        </div>
+        <script>
+        $(document).ready(function() {
+            var alert_modal = document.getElementById("alertModal");
+            alert_modal.style.display = "block";
+        });
+        </script>
+
+  </div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+
+
+<div class="row">
+    <div class="col-xl-12">
+        <h3>Account Information:</h3>
+    </div>
+
+    <div class="col-xl-12 cell">
+
+        <div class="row">
+            <div class="col-xl-5">
+                <p><b>Account #:</b> 19938</p>
+                <p><b>Member Name:</b> Becky Rodriguez</p>
+                <p><b>Member Address:</b> 1230 Drive Ln TX, 12394</p>
+            </div>
+
+            <div class="col-xl-7">
+                <h5>Alert Status:</h5>
+                {% if alerts == "true" %}
+                <p><b>Categories:</b> Bankruptcy</p>
+                <p><b>Entered By:</b> UserAccount Who made it</p>
+                {% endif %}
+            </div>
+
+            <div class="col-xl-5">
+                <button class="btn btn-view form_navigate" type="button" name="19938" value="edit_account">Edit Account Info</button>
+            </div>
+            <div class="col-xl-7">
+                {% if alerts == "true" %}
+                <button class="btn btn-view form_navigate" type="button" name="19938" value="create_alert">View Alert</button>
+                {% endif %}
+                {% if alerts != "true" %}
+                <button class="btn btn-view form_navigate" type="button" name="19938" value="create_alert">Create Alert</button>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row mt-5">
+    {% include "table_notes.html" %}
+</div>
+
+<script>
+$(document).ready(function() {
+    pull_form();
+});
+</script>

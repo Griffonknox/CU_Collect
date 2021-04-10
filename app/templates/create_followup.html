@@ -1,0 +1,45 @@
+<form method="post" id="followup_form">
+<div class="row">
+  <div class="col-xl-12">
+    <h3 class="mb-2">Create Followup:</h3>
+  </div>
+
+
+
+    <div class="col-xl-6">
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <div class="input-group-text">Call Type:</div>
+          </div>
+          <select class="custom-select" name="call_type" required>
+              <option value="Note">Note</option>
+              <option value="Download">Download</option>
+          </select>
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Loan #:</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Loan #" name="loan_num">
+        </div>
+    </div>
+
+
+    <div class="col-xl-12">
+        <input type="hidden" value="account_num">
+
+      <textarea id="text_edit" name="editordata" required></textarea>
+      <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit</button>
+    </div>
+
+</div>
+</form>
+<script>
+$(document).ready(function() {
+  $('#text_edit').trumbowyg();
+  formSubmit("followup_submit", "followup_form", "followup_submit", "display", "off");
+});
+</script>

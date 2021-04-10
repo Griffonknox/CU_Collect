@@ -1,0 +1,46 @@
+<form id="submit_account" action="/submit_account" method="post">
+<div class="row">
+
+    <div class="col-xl-12">
+        <h3 clas="mb-3">Create Account:</h3>
+    </div>
+
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text login-width">Account #:</span>
+          </div>
+          <input type="number" class="form-control" placeholder="Account #" name="account_num">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Member Name:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="100" placeholder="Member Name" name="memb_name">
+        </div>
+    </div>
+
+    <div class="col-xl-12">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Member Address:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="100" placeholder="Member Address" name="memb_address">
+        </div>
+    </div>
+
+    <div class="col-xl-12">
+        <button class="btn btn-view mt-2" style="float: right;">Submit</button>
+    </div>
+
+</div>
+</form>
+<script>
+$(document).ready(function() {
+
+});
+</script>

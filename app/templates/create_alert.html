@@ -1,0 +1,42 @@
+<div class="row">
+
+    <div class="col-xl-12">
+        <h3 class="mb-3">Create Alert:</h3>
+    </div>
+
+
+    <div class="col-xl-3">
+        <h5>Alert Categories:</h5>
+    </div>
+
+    <div class="col-xl-9">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+          <label class="form-check-label" for="inlineRadio1">Bankruptcy</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+          <label class="form-check-label" for="inlineRadio2">Total Loss</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+          <label class="form-check-label" for="inlineRadio3">Repossession</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3">
+          <label class="form-check-label" for="inlineRadio4">Charged Off Loan</label>
+        </div>
+    </div>
+
+    <input type="hidden" value="account_num">
+
+    <div class="col-xl-12">
+      <textarea id="text_edit" name="editordata" required></textarea>
+      <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit</button>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#text_edit').trumbowyg();
+});
+</script>

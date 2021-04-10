@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CU Collect</title>
+    <link rel="icon" href="{{ url_for('static',filename='img/logo.png') }}" type="image/x-icon">
+    {% include "addons.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <img style="width: 75%;" class="mx-auto d-block mt-3" src="{{ url_for('static', filename='img/banner.png') }}"><br><br>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="notification is-danger">
+                <p style="color: red; font-size: 30px; text-align: center;"><b>{{ messages[0] }}</b></p>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+        </div>
+
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-xl-12">
+            <h3>Account Query:</h3>
+        </div>
+        <div class="col-xl-12 cell">
+            <div class="row">
+
+                <div class="col-xl-7">
+                    <form id="acct-search" method="post" >
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Account Number:</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Account Number" name="acct_num">
+                        <button class="btn btn-view acct-search" type="button">Search Account</button>
+
+                    </div>
+                    </form>
+                </div>
+
+                <div class="col-xl-3">
+                    <div>
+                    <span class="click_link" style="font-size: 12px;">(Advanced Search)</span><br>
+                    <a href="/home"><span class="click_link" style="font-size: 12px;">(Clear Search)</span></a>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-2">
+                    <button class="btn btn-view modal_navigate" value="create_account" type="button" style="float:right;">Create Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+
+
+    <div id="display">
+
+    </div>
+
+
+        <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div id="modal_display"></div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+$(document).ready(function() {
+    formSubmit("acct-search", "acct-search", "search_account", "display", "none");
+    modal_navigate();
+});
+</script>
+</html>

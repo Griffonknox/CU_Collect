@@ -1,0 +1,26 @@
+<div class="col-xl-12">
+    <div class="text-center mt-3 mb-5" style="font-size: 30px; color: red;">WARNING! ACCOUNT HAS ACTIVE ALERT(S)</div>
+
+    <div class="text-center mb-5">
+        VIEW THE LATEST aLERT INFORMATIONG INCLUDING THE TIME DATE AND THE PERSON WHO ENTERED.
+        <br>
+        PLUS THE NOTEPAD ENTRY THAT WAS PUT IN, WE ALSO WANT TO MAKE IT SO THEY CANNOT CLOSE THE MODAL UNLESS THEY CLICK THIS SPECIFIC BUTTON, THIS ONE ONLY. TO CONTINUE
+    </div>
+
+    <div class="text-center mb-5">
+    <button class="btn btn-view" id="close_alert" type="button">
+        Click Button To acknowledge!
+    </button>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+    $('#close_alert').click(function() {
+    var alert_modal = document.getElementById("alertModal");
+        alert_modal.style.display = "none";
+    });
+
+});
+</script>
