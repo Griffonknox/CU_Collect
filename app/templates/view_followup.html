@@ -1,27 +1,25 @@
 <div class="row">
   <div class="col-xl-12">
-
-    <h3 clas="mb-2">Edit Followup id: Id#:</h3>
-
-    <form method="post" id="followup_form">
-      <div class="input-group mb-3" style="width: 50%;">
-          <div class="input-group-prepend">
-              <div class="input-group-text">Call Type:</div>
-          </div>
-          <select class="custom-select" name="call_type" required>
-              <option value="Note">Note</option>
-              <option value="Download">Download</option>
-          </select>
-      </div>
-
-      <textarea id="text_edit" name="editordata" required></textarea>
-      <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit</button>
-    </form>
+    <h3 clas="mb-2">View Follow Up:</h3>
   </div>
+
+    <div class="col-xl-6">
+        <p><b>Date:</b> {{follow.datEnteredDatetime}}</p>
+        <p><b>Entered By:</b> {{follow.varEnteredBy}}</p>
+    </div>
+
+    <div class="col-xl-6">
+        <p><b>Call Type:</b> {{follow.varCallType}}</p>
+        <p><b>Loan #:</b> {{follow.varLoanNo}}</p>
+    </div>
+
+    <div class="col-xl-12">
+        <div>{{follow.txtDetails}}</div>
+    </div>
+
 </div>
 <script>
 $(document).ready(function() {
-  $('#text_edit').trumbowyg();
-  formSubmit("followup_submit", "followup_form", "followup_submit", "display", "off");
+
 });
 </script>

@@ -14,16 +14,18 @@
             <th>Date</th>
             <th>Call Type</th>
             <th>Entered By</th>
+            <th>Loan #</th>
             <th>View</th>
         </tr>
         </thead>
         <tbody>
-        {% for test in data %}
+        {% for post in follow %}
         <tr>
-            <td>{{test[0]}}</td>
-            <td>{{test[1]}}</td>
-            <td>{{test[2]}}</td>
-            <td><button class="btn btn-sm btn-view modal_navigate" name="" value="view_followup" type="button" style="float: right;">View Followup</button></td>
+            <td>{{post.datEnteredDatetime}}</td>
+            <td>{{post.varCallType}}</td>
+            <td>{{post.varEnteredBy}}</td>
+            <td>{{post.varLoanNo}}</td>
+            <td><button class="btn btn-sm btn-view follow_view" value="{{post.key}}" type="button" style="float: right;">View Followup</button></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -32,7 +34,8 @@
 <script>
 $(document).ready(function() {
     $("#table_id").DataTable();
-    table_toggle ("table_toggle", "table_display")
+    table_toggle ("table_toggle", "table_display");
+    follow_view();
     modal_navigate();
 });
 </script>

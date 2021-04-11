@@ -86,7 +86,7 @@ function modal_navigate() {
 };
 
 
-function pull_form() {
+function modal_param() {
 
     var form_modal = document.getElementById("myModal");
 
@@ -100,10 +100,10 @@ function pull_form() {
     $('.form_navigate').click(function() {
 
         var type = this.value;
-        var acct = this.name;
+        var key = this.name;
 
         $.ajax({
-        url: "/" + type + "?acct=" + acct,
+        url: "/" + type + "?key=" + key,
         type: "GET",
         success: function(response) {
             $("#modal_display").html(response);
@@ -113,4 +113,31 @@ function pull_form() {
     });
 
 
+};
+
+
+function follow_view() {
+
+    var form_modal = document.getElementById("myModal");
+
+        // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == form_modal) {
+        form_modal.style.display = "none";
+      }
+    }
+
+    $('.follow_view').click(function() {
+
+        var key = this.value;
+
+        $.ajax({
+        url: "/view_followup" + "?key=" + key,
+        type: "GET",
+        success: function(response) {
+            $("#modal_display").html(response);
+            form_modal.style.display = "block";
+          }
+        });
+    });
 };

@@ -1,5 +1,6 @@
 from app import app
 from flask import render_template, redirect, url_for, request, flash
+from .models import session, Follow_Up, Acct_memb, Alert
 
 
 
@@ -31,19 +32,25 @@ def log_out():
 def search_account():
 
     acct_num = request.form["acct_num"]
-    print(acct_num)
+
     #query account  information by acct_number
+    acct_query = session.query(Acct_memb).filter_by(varClientKey=acct_num).first()
+    if acct_query:
 
-    #query Alerts
-    #if alerts then flash and do process
-    flash("WARNING! ACCOUNT HAS ACTIVE ALERT(S)")
+        # query all followups by account number
+        follow_query = session.query(Follow_Up).filter_by(varClientKey=int(acct_num)).all()
 
-    #query all followups by account number
-    data = list()
-    for add in range(16):
-        data.append(["3/27/2021", "Note", "UserAccountLoggedIN"])
+        #query Alerts
+        alert_query = session.query(Alert).filter_by(varClientKey=int(acct_num)).all() # consider to get descending
+        if len(alert_query) != 0:
+            flash("WARNING! ACCOUNT HAS ACTIVE ALERT(S)")
+            return render_template("search_account.html", follow=follow_query, alerts="true", acct=acct_query, alert=alert_query[0])
 
-    return render_template("search_account.html", data=data, alerts="true")
+        else:
+            return render_template("search_account.html", follow=follow_query, alerts="false", acct=acct_query)
+    else:
+        return render_template("no_account.html")
+
 
 
 @app.route("/create_account", methods=["POST", "GET"])
@@ -81,7 +88,8 @@ def create_followup():
 @app.route("/view_followup", methods=["POST", "GET"])
 def view_followup():
     #pull form template
-    return render_template("view_followup.html")
+    follow_view = session.query(Follow_Up).filter_by(key=request.args.get('key')).first()
+    return render_template("view_followup.html", follow=follow_view)
 
 
 @app.route("/followup_submit", methods=["POST", "GET"])
@@ -101,6 +109,10 @@ def followup_submit():
 
 @app.route("/create_alert", methods=["POST", "GET"])
 def create_alert():
-    acct_num = request.args.get('acct')
-    print(acct_num)
-    return render_template("create_alert.html", acct_num=acct_num)
+    acct_num = request.args.get('key')
+    return render_template("create_alert.html", alert=acct_num)
+
+@app.route("/view_alert", methods=["POST", "GET"])
+def view_alert():
+    alert_view = session.query(Alert).filter_by(key=request.args.get('key')).first()
+    return render_template("alert_view.html", alert=alert_view)

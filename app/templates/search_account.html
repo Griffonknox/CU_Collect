@@ -35,26 +35,26 @@
     <div class="col-xl-12 cell">
 
         <div class="row">
-            <div class="col-xl-5">
-                <p><b>Account #:</b> 19938</p>
-                <p><b>Member Name:</b> Becky Rodriguez</p>
-                <p><b>Member Address:</b> 1230 Drive Ln TX, 12394</p>
+            <div class="col-xl-6">
+                <p><b>Account #:</b> {{acct.varClientKey}}</p>
+                <p><b>Member Name:</b> {{acct.Acct_Name}}</p>
+                <p><b>Member Address:</b> {{acct.Acct_Address}}</p>
             </div>
 
-            <div class="col-xl-7">
+            <div class="col-xl-6">
                 <h5>Alert Status:</h5>
                 {% if alerts == "true" %}
-                <p><b>Categories:</b> Bankruptcy</p>
-                <p><b>Entered By:</b> UserAccount Who made it</p>
+                <p><b>Categories:</b> {{alert.Alert_Cat}}</p>
+                <p><b>Entered By:</b> {{alert.varEnteredBy}}</p>
                 {% endif %}
             </div>
 
-            <div class="col-xl-5">
+            <div class="col-xl-6">
                 <button class="btn btn-view form_navigate" type="button" name="19938" value="edit_account">Edit Account Info</button>
             </div>
-            <div class="col-xl-7">
+            <div class="col-xl-6">
                 {% if alerts == "true" %}
-                <button class="btn btn-view form_navigate" type="button" name="19938" value="create_alert">View Alert</button>
+                <button class="btn btn-view form_navigate" type="button" name="{{alert.key}}" value="view_alert">View Alert</button>
                 {% endif %}
                 {% if alerts != "true" %}
                 <button class="btn btn-view form_navigate" type="button" name="19938" value="create_alert">Create Alert</button>
@@ -68,12 +68,12 @@
 </div>
 
 
-<div class="row mt-5">
+<div class="row mt-5 mb-5">
     {% include "table_notes.html" %}
 </div>
 
 <script>
 $(document).ready(function() {
-    pull_form();
+    modal_param();
 });
 </script>
