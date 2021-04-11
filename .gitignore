@@ -1,4 +1,7 @@
 /app/config.py
+.idea/*
+Data/*
+
 
 
 # Byte-compiled / optimized / DLL files
