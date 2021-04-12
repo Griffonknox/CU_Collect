@@ -23,13 +23,13 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Loan #:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Loan #" name="loan_num">
+          <input type="text" class="form-control" placeholder="Loan #" name="loan_num" required>
         </div>
     </div>
 
 
     <div class="col-xl-12">
-        <input type="hidden" value="account_num">
+        <input type="hidden" value={{acct}} name="acct_num">
 
       <textarea id="text_edit" name="editordata" required></textarea>
       <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit</button>

@@ -31,7 +31,11 @@ def log_out():
 @app.route("/search_account", methods=["POST", "GET"])
 def search_account():
 
-    acct_num = request.form["acct_num"]
+    if request.args.get('acct'):
+        acct_num = request.args.get('acct')
+        print(acct_num)
+    else:
+        acct_num = request.form["acct_num"]
 
     #query account  information by acct_number
     acct_query = session.query(Acct_memb).filter_by(varClientKey=acct_num).first()
@@ -41,7 +45,7 @@ def search_account():
         follow_query = session.query(Follow_Up).filter_by(varClientKey=int(acct_num)).all()
 
         #query Alerts
-        alert_query = session.query(Alert).filter_by(varClientKey=int(acct_num)).all() # consider to get descending
+        alert_query = session.query(Alert).filter_by(varClientKey=int(acct_num)).all()  # consider to get descending
         if len(alert_query) != 0:
             flash("WARNING! ACCOUNT HAS ACTIVE ALERT(S)")
             return render_template("search_account.html", follow=follow_query, alerts="true", acct=acct_query, alert=alert_query[0])
@@ -60,11 +64,25 @@ def create_account():
 
 @app.route("/submit_account", methods=["POST", "GET"])
 def submit_account():
+
     account_num = request.form["account_num"]
     memb_name = request.form["memb_name"]
     memb_address = request.form["memb_address"]
-    print(account_num, memb_name, memb_address)
-    return redirect(url_for("home"))
+
+    # see if existing account_num
+    acct_query = session.query(Acct_memb).filter_by(varClientKey=account_num).all()
+
+    if len(acct_query) == 0:
+        new_acct = Acct_memb(varClientKey=account_num, Acct_Name=memb_name, Acct_Address=memb_address)
+        session.add(new_acct)
+        session.commit()
+        session.close()
+        flash("Account {} Successfully Made.".format(account_num))
+        return redirect(url_for("home"))
+
+    else:
+        flash("Account Number {} Already in Use.".format(account_num))
+        return redirect(url_for("home"))
 
 
 @app.route("/edit_account", methods=["POST", "GET"])
@@ -82,8 +100,9 @@ def edit_account():
 
 @app.route("/create_followup", methods=["POST", "GET"])
 def create_followup():
-    #pull form template
-    return render_template("create_followup.html")
+    #pull form template and pass acct_num
+    acct_num = request.args.get('key')
+    return render_template("create_followup.html", acct=acct_num)
 
 @app.route("/view_followup", methods=["POST", "GET"])
 def view_followup():
@@ -97,9 +116,10 @@ def followup_submit():
     # add form data to DB
     print(request.form["editordata"])
     print(request.form["call_type"])
+    print(request.form["acct_num"])
 
     #requery table data
-    return redirect(url_for("search_account"))
+    return redirect(url_for("search_account", acct=request.form["acct_num"]))
 
 
 

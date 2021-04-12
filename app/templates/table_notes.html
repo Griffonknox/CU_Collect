@@ -4,7 +4,7 @@
 </div>
 
 <div class="col-xl-6">
-    <button class="btn btn-view modal_navigate" value="create_followup" style="float: right;">Create Followup</button>
+    <button class="btn btn-view form_navigate" value="create_followup" name={{acct.varClientKey}} style="float: right;">Create Followup</button>
 </div>
 
 <div class="col-xl-12 mt-5 mb-5 cell" id="table_display" style="display: none;">
@@ -36,6 +36,6 @@ $(document).ready(function() {
     $("#table_id").DataTable();
     table_toggle ("table_toggle", "table_display");
     follow_view();
-    modal_navigate();
+<!--    modal_navigate();-->
 });
 </script>

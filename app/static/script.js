@@ -127,7 +127,7 @@ function follow_view() {
       }
     }
 
-    $('.follow_view').click(function() {
+    $("#table_id").on("click", '.follow_view', (function() {
 
         var key = this.value;
 
@@ -139,5 +139,5 @@ function follow_view() {
             form_modal.style.display = "block";
           }
         });
-    });
+    }));
 };
