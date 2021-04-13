@@ -1,3 +1,4 @@
+<form id="edit_account" action="/submit_account" method="post">
 <div class="row">
     <div class="col-xl-12">
         <h3 clas="mb-3">Edit Account:</h3>
@@ -9,7 +10,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text login-width">Account #:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Account #" name="account_num">
+          <input type="text" class="form-control" placeholder="Account #" name="account_num" id="key">
         </div>
     </div>
 
@@ -18,7 +19,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Member Name:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Name" name="memb_name">
+          <input type="text" class="form-control" placeholder="Member Name" name="memb_name" id="name">
         </div>
     </div>
 
@@ -29,20 +30,24 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Member Address:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Address" name="memb_address">
+          <input type="text" class="form-control" placeholder="Member Address" name="memb_address" id="address">
         </div>
     </div>
 
-    <input type="hidden" value="{{acct_num}}" name="acct_num">
+    <input type="hidden" value="edit" name="edit">
 
     <div class="col-xl-12">
-        <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit Edit</button>
+        <button class="btn btn-view mt-2 account_edit" style="float: right;" type="button">Submit Edit</button>
     </div>
 
 </div>
+</form>
 <script>
 $(document).ready(function() {
+    formSubmit("account_edit", "edit_account", "submit_account", "display", "off");
 
-
+    $("#key").val("{{acct.varClientKey}}");
+    $("#name").val("{{acct.Acct_Name}}");
+    $("#address").val("{{acct.Acct_Address}}");
 });
 </script>
