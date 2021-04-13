@@ -55,9 +55,10 @@
             <div class="col-xl-6">
                 {% if alerts == "true" %}
                 <button class="btn btn-view form_navigate" type="button" name="{{alert.key}}" value="view_alert">View Alert</button>
+                <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="create_alert">Create New Alert</button>
                 {% endif %}
                 {% if alerts != "true" %}
-                <button class="btn btn-view form_navigate" type="button" name="19938" value="create_alert">Create Alert</button>
+                <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="create_alert">Create Alert</button>
                 {% endif %}
             </div>
 

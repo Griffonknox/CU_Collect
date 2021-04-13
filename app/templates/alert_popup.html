@@ -6,7 +6,7 @@
         <p><b>Categories:</b> {{alert.Alert_Cat}}</p>
         <p><b>Entered By:</b> {{alert.varEnteredBy}}</p>
         <p><b>Date Entered:</b> {{alert.dateEntered}}</p>
-        <div>{{alert.Alert_Detail}}</div>
+        <div>{{alert.Alert_Detail | safe}}</div>
     </div>
 
     <div class="text-center mb-5">

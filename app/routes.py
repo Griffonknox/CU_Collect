@@ -1,7 +1,7 @@
 from app import app
 from flask import render_template, redirect, url_for, request, flash
 from .models import session, Follow_Up, Acct_memb, Alert
-from .utils import query_alert, query_account, query_follow, create_account, edit_acct
+from .utils import query_alert, query_account, query_follow, create_account, edit_acct, create_follow, create_alert_
 
 
 
@@ -49,7 +49,7 @@ def search_account():
         alert_query = query_alert(acct_num, 0)  # consider to get descending
         if len(alert_query) != 0:
             flash("WARNING! ACCOUNT HAS ACTIVE ALERT(S)")
-            return render_template("search_account.html", follow=follow_query, alerts="true", acct=acct_query, alert=alert_query[0])
+            return render_template("search_account.html", follow=follow_query, alerts="true", acct=acct_query, alert=alert_query[-1])
 
         else:
             return render_template("search_account.html", follow=follow_query, alerts="false", acct=acct_query)
@@ -118,20 +118,9 @@ def view_followup():
 @app.route("/followup_submit", methods=["POST", "GET"])
 def followup_submit():
     # add form data to DB
-    print(request.form["editordata"])
-    print(request.form["call_type"])
-    print(request.form["acct_num"])
+    create_follow(request.form["acct_num"], request.form["call_type"], request.form["loan_num"], request.form["editordata"])
 
-    follow_sub = Follow_Up(varClientKey=request.form["acct_num"], varCallType="test", varEnteredBy="test", datEnteredDatetime="test",
-              txtDetails="test", varLoanNo=34)
-
-    session.add(follow_sub)
-    session.commit()
-    session.close()
-    #requery table data
     return redirect(url_for("search_account", acct=request.form["acct_num"]))
-
-
 
 
 
@@ -140,9 +129,14 @@ def followup_submit():
 @app.route("/create_alert", methods=["POST", "GET"])
 def create_alert():
     acct_num = request.args.get('key')
-    return render_template("create_alert.html", alert=acct_num)
+    return render_template("create_alert.html", acct=acct_num)
 
 @app.route("/view_alert", methods=["POST", "GET"])
 def view_alert():
     alert_view = session.query(Alert).filter_by(key=request.args.get('key')).first()
     return render_template("alert_view.html", alert=alert_view)
+
+@app.route("/submit_alert", methods=["POST", "GET"])
+def submit_alert():
+    create_alert_(request.form["key"], request.form["alert_cat"], request.form["editordata"])
+    return redirect(url_for("search_account", acct=request.form["key"]))
