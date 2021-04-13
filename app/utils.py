@@ -11,27 +11,45 @@ def query_account(clientkey, amount):
     return acct
 
 
-def query_alert(clientkey, amount):
-    if amount == 1:
-        alert = session.query(Alert).filter_by(varClientKey=clientkey).first()
-        session.close()
-    elif amount != 1:
-        alert = session.query(Alert).filter_by(varClientKey=clientkey).all()
-        session.close()
-    return alert
+def query_alert(key, amount, search):
+    if search == "key":
+        if amount == 1:
+            alert = session.query(Alert).filter_by(key=key).first()
+            session.close()
+        elif amount != 1:
+            alert = session.query(Alert).filter_by(key=key).all()
+            session.close()
+        return alert
+    elif search == "client":
+        if amount == 1:
+            alert = session.query(Alert).filter_by(varClientKey=key).first()
+            session.close()
+        elif amount != 1:
+            alert = session.query(Alert).filter_by(varClientKey=key).all()
+            session.close()
+        return alert
 
 
-def query_follow(clientkey, amount):
-    if amount == 1:
-        follow = session.query(Follow_Up).filter_by(varClientKey=clientkey).first()
-        session.close()
-    elif amount != 1:
-        follow = session.query(Follow_Up).filter_by(varClientKey=clientkey).all()
-        session.close()
-    return follow
+def query_follow(key, amount, search):
+    if search == "key":
+        if amount == 1:
+            follow = session.query(Follow_Up).filter_by(key=key).first()
+            session.close()
+        elif amount != 1:
+            follow = session.query(Follow_Up).filter_by(key=key).all()
+            session.close()
+        return follow
+    elif search == "client":
+        if amount == 1:
+            follow = session.query(Follow_Up).filter_by(varClientKey=key).first()
+            session.close()
+        elif amount != 1:
+            follow = session.query(Follow_Up).filter_by(varClientKey=key).all()
+            session.close()
+        return follow
 
 
-def create_account(num, name, address):
+def create_account_(num, name, address):
     new_acct = Acct_memb(varClientKey=num, Acct_Name=name, Acct_Address=address)
     session.add(new_acct)
     session.commit()
