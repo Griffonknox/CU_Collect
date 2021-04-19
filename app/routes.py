@@ -15,14 +15,50 @@ def authenticate_user():
     return redirect(url_for("home"))
 
 
+@app.route('/log_out')
+def log_out():
+    return redirect(url_for("log_in"))
+
+
 @app.route('/home')
 def home():
     return render_template("home.html")
 
 
-@app.route('/log_out')
-def log_out():
-    return redirect(url_for("log_in"))
+@app.route('/reports')
+def reports():
+    return render_template("reports.html")
+
+
+@app.route("/search_report", methods=['POST', 'GET'])
+def search_report():
+
+    acct_num = request.form["acct_num"]
+
+    acct_query = query_account(acct_num, 1)
+
+    if acct_query:
+
+        # query all followups by account number
+        follow_query = query_follow(acct_num, 0, "client")
+
+        # apply date filter
+        # date_from = request.form["from"]
+        # date_to = request.form["to"]
+
+        # query Alerts
+        alert_query = query_alert(acct_num, 0, "client")  # consider to get descending
+        if len(alert_query) != 0:
+            return render_template("search_report.html", follow=follow_query, alerts="true", acct=acct_query,
+                                   alert=alert_query[-1])
+        else:
+            return render_template("search_report.html", follow=follow_query, alerts="true", acct=acct_query,
+                                   alert=alert_query[-1])
+    else:
+        flash("No Accounts found.")
+        return redirect(url_for("reports"))
+
+
 
 
 """ACCOUNT CATEGORIES"""

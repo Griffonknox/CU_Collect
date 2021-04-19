@@ -8,6 +8,13 @@
     box-shadow: 0 5px 10px black;
 }
 
+.nav_button {
+    background-color: white;
+    border-radius: 5px;
+    margin: 5px;
+    width: 150px;
+}
+
 .cell {
     background-color: white;
     padding: 15px;
@@ -57,3 +64,27 @@
 .alert-txt p {
     font-size: 20px;
 }
+
+
+.report_list {
+    margin-right:3em;
+}
+
+.dtl {
+    font-size: 12px;
+}
+
+
+/* PDF Content */
+.pdf-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 1000px;
+}
+
+#modal_pdf {
+    padding: 20px;
+}
+

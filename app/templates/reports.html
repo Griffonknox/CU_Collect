@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CU Collect</title>
+    <link rel="icon" href="{{ url_for('static',filename='img/logo.png') }}" type="image/x-icon">
+    {% include "addons.html" %}
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <img style="width: 75%;" class="mx-auto d-block mt-3" src="{{ url_for('static', filename='img/banner.png') }}"><br><br>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="notification is-danger">
+                <p style="color: red; font-size: 30px; text-align: center;"><b>{{ messages[0] }}</b></p>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-xl-12">
+            <h3>Report Builder:</h3>
+        </div>
+        <div class="col-xl-12 cell">
+
+            <form id="report-form" method="post" >
+            <div class="row">
+
+                <div class="col-xl-5">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Account Number:</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Account Number" name="acct_num" required>
+                        </div>
+
+                </div>
+
+                <div class="col-xl-7">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Date Range:</span>
+                        </div>
+                        <input type="date" class="form-control" placeholder="From" name="from" >
+                          <div class="input-group-append">
+                            <label class="input-group-text">-</label>
+                          </div>
+                        <input type="date" class="form-control" placeholder="To" name="to" >
+                        <button class="btn btn-view report-search" type="button">Create Report</button>
+
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+
+
+
+    <div id="display">
+
+    </div>
+
+
+        <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="pdf-content">
+            <div id="modal_pdf" class="canvas_div_pdf"></div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+$(document).ready(function() {
+    formSubmit("report-search", "report-form", "search_report", "display", "none");
+    modal_navigate();
+});
+</script>
+</html>
