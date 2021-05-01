@@ -42,7 +42,7 @@ class Follow_Up(Base):
     varEnteredBy = Column(String(100))
     dateEntered = Column(String(50))
     txtDetails = Column(String(5000))
-    varLoanNo = Column(Integer)
+    varLoanNo = Column(String(25))
     delq_days = Column(String(20))
 
 

@@ -76,8 +76,7 @@ def search_report():
             return render_template("search_report.html", follow=follow_query, alerts="true", acct=acct_query,
                                    alert=alert_query[-1])
         else:
-            return render_template("search_report.html", follow=follow_query, alerts="true", acct=acct_query,
-                                   alert=alert_query[-1])
+            return render_template("search_report.html", follow=follow_query, alerts="true", acct=acct_query)
     else:
         flash("No Accounts found.")
         return redirect(url_for("reports"))
@@ -106,8 +105,9 @@ def search_account():
 
         #query last 5 follow ups
         follow_recent = pd.read_sql(session.query(Follow_Up).filter_by(varClientKey=acct_num).statement, session.bind)
-
-        #do some date sorting
+        session.close()
+        follow_recent["dateEntered"] = pd.to_datetime(follow_recent['dateEntered'], dayfirst=True)
+        follow_recent = follow_recent.sort_values('dateEntered', ascending=False)
         follow_recent = follow_recent.head(5)
 
         # query Alerts
@@ -118,7 +118,7 @@ def search_account():
                                    alert=alert_query[-1])
 
         else:
-            return render_template("search_account.html", follow=follow_query, follow_recent=follow_recent, alerts="false", acct=acct_query)
+            return render_template("search_account.html", follow=follow_query, follow_recent=follow_recent.values.tolist(), alerts="false", acct=acct_query)
     else:
         return render_template("no_account.html")
 
