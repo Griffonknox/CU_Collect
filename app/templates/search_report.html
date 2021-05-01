@@ -51,8 +51,11 @@
 
             <div class="col-xl-6">
                 <p><b>Account Number:</b> {{acct.varClientKey}}</p>
-                <p><b>Account Name:</b> {{acct.Acct_Name}}</p>
-                <p><b>Account Address:</b> {{acct.Acct_Address}}</p>
+                <p><b>Account Name:</b> {{acct.acct_name}}</p>
+                <p><b>Account Address:</b> {{acct.acct_address}}</p>
+                <p><b>Account Address 2:</b> {{acct.acct_address2}}</p>
+                <p><b>Phone:</b> {{acct.phone}}</p>
+                <p><b>Phone 2:</b> {{acct.phone2}}</p>
             </div>
 
 
@@ -72,9 +75,9 @@
                     {% for f_ in follow  %}
                         <li class="mb-5">
                             <div class="row">
-                                <div class="col-xl-4"><b>Date:</b> {{f_.datEnteredDatetime}}</div>
+                                <div class="col-xl-4"><b>Date:</b> {{f_.dateEntered}}</div>
                                 <div class="col-xl-4"><b>Entered By:</b> {{f_.varEnteredBy}}</div>
-                                <div class="col-xl-2"><b>Call Type:</b> {{f_.varCallType}}</div>
+                                <div class="col-xl-2"><b>Delinquent Days:</b> {{f_.delq_days}}</div>
                                 <div class="col-xl-2"><b>Loan #:</b> {{f_.varLoanNo}}</div>
                                 <div class="col-xl-12"><b>Detail:</b> <span class="dtl">{{f_.txtDetails}}</span></div>
                             </div>

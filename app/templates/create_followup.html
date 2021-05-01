@@ -5,33 +5,28 @@
   </div>
 
 
-
-    <div class="col-xl-6">
-      <div class="input-group mb-3">
-          <div class="input-group-prepend">
-              <div class="input-group-text">Call Type:</div>
-          </div>
-          <select class="custom-select" name="call_type" required>
-              <option value="Note">Note</option>
-              <option value="Download">Download</option>
-          </select>
-      </div>
-    </div>
-
     <div class="col-xl-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Loan #:</span>
           </div>
-          <input type="number" class="form-control" placeholder="Loan #" name="loan_num" required>
+          <input type="number" class="form-control" placeholder="Loan #" name="loan_num" max="1000" required>
         </div>
     </div>
 
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Delinquent Days:</span>
+          </div>
+          <input type="number" class="form-control" placeholder="Delinquent Days" name="delq_days" max="1000000" required>
+        </div>
+    </div>
 
     <div class="col-xl-12">
         <input type="hidden" value={{acct}} name="acct_num">
 
-      <textarea id="text_edit" name="editordata" required></textarea>
+      <textarea id="text_edit" name="editordata" maxlength="1000" required></textarea>
       <button class="btn btn-view mt-2 followup_submit" style="float: right;" type="button">Submit</button>
     </div>
 

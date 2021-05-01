@@ -1,17 +1,16 @@
 import pandas as pd
 import pymysql
-from sqlalchemy import create_engine, Integer, String, Column
+from sqlalchemy import create_engine, Integer, String, Column, BINARY
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from app.config import hash_pass
+from werkzeug.security import generate_password_hash
 
 """CONNECT TO THE MYSQL DATABASE"""
-username = "root"
-password = "Password1!"
-host = "192.168.1.245:3306"
-dbname = "Collections"
 
-url = "mysql+pymysql://{}:{}@{}/{}".format(username, password, host, dbname)
-cnx = create_engine(url)
+
+# url = "mysql+pymysql://{}:{}@{}/{}".format(username, password, host, dbname)
+# cnx = create_engine(url)
 # df = pd.read_sql('SELECT varClientKey FROM Follow_Up', cnx)  # read the entire table
 
 # df = pd.DataFrame(columns = ["varClientKey", "datEnteredDatetime", "varEnteredBy", "varCallType", "txtDetails", "varLoanNo"])
@@ -86,7 +85,15 @@ def add_alert():
     dtype = {"key": Integer(), "varClientKey": Integer(), "dateEntered": String(50), "varEnteredBy": String(100), "Alert_Cat": String(20), "Alert_Details": String(5000)}
     df_alert.to_sql('Alert', if_exists='replace', con=cnx, chunksize=100, index=False, dtype=dtype)
 
+
+def create_user():
+    user = {"id":[1], "username": ["test"], "password": [generate_password_hash("test", "sha256")], "urole": [1], "full_name": ["test mctester"]}
+    df = pd.DataFrame(user, columns=['id', 'username', "password", "urole", "full_name"])
+    dtype= {"id": Integer(), "username": String(50), "password": String(150), "urole": Integer(), "full_name": String(100)}
+    df.to_sql("User", if_exists="replace", con=cnx, index=False, dtype=dtype)
+
 if __name__ == "__main__":
     # add_accts()
     # add_followup()
-    add_alert()
+    # add_alert()
+    create_user()

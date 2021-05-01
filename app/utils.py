@@ -49,20 +49,21 @@ def query_follow(key, amount, search):
         return follow
 
 
-def create_account_(num, name, address):
-    new_acct = Acct_memb(varClientKey=num, Acct_Name=name, Acct_Address=address)
+def create_account_(num, name, address, phone):
+    new_acct = Acct_memb(varClientKey=num, acct_name=name, acct_address=address, phone=phone)
     session.add(new_acct)
     session.commit()
     session.close()
 
 
-def create_follow(num, call, loan, detail):
+def create_follow(num, loan, detail, delq, user):
+    print(num, loan, detail, delq, user)
 
-    logged_user = "tst"  #include logged in value
+    logged_user = user  #include logged in value
     current_time = datetime.datetime.now().strftime("%m/%d/%Y %I:%M:%S %p")
 
-    follow_create = Follow_Up(varClientKey=num, varCallType=call, varEnteredBy=logged_user,
-                              datEnteredDatetime=current_time, txtDetails=detail, varLoanNo=loan)
+    follow_create = Follow_Up(varClientKey=num, varEnteredBy=logged_user, delq_days=delq,
+                              dateEntered=current_time, txtDetails=detail, varLoanNo=loan)
 
     session.add(follow_create)
     session.commit()
@@ -81,10 +82,13 @@ def create_alert_(num, cat, detail):
 
 
 
-def edit_acct(num, name, address):
+def edit_acct(num, name, address, address2, phone, phone2):
     acct = query_account(num, 1)
-    acct.Acct_Name = name
-    acct.Acct_Address = address
+    acct.acct_name = name
+    acct.acct_address = address
+    acct.acct_address2 = address2
+    acct.phone = phone
+    acct.phone2 = phone2
     session.merge(acct)
     session.commit()
     session.close()

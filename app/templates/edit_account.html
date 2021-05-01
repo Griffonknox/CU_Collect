@@ -19,18 +19,45 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Member Name:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Name" name="memb_name" id="name">
+          <input type="text" class="form-control" placeholder="Member Name" name="memb_name" id="name" maxlength="50">
         </div>
     </div>
 
 
 
-    <div class="col-xl-12">
+    <div class="col-xl-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Member Address:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Address" name="memb_address" id="address">
+          <input type="text" class="form-control" placeholder="Member Address" name="memb_address" id="address" maxlength="150">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Member Address 2:</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Member Address" name="memb_address2" id="address2" maxlength="150">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Phone:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone" name="memb_phone" id="phone">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Phone 2:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone" name="memb_phone2" id="phone2">
         </div>
     </div>
 
@@ -47,7 +74,10 @@ $(document).ready(function() {
     formSubmit("account_edit", "edit_account", "edit_acct_submit", "display", "off");
 
     $("#key").val("{{acct.varClientKey}}");
-    $("#name").val("{{acct.Acct_Name}}");
-    $("#address").val("{{acct.Acct_Address}}");
+    $("#name").val("{{acct.acct_name}}");
+    $("#address").val("{{acct.acct_address}}");
+    $("#address2").val("{{acct.acct_address2}}");
+    $("#phone").val("{{acct.phone}}");
+    $("#phone2").val("{{acct.phone2}}");
 });
 </script>

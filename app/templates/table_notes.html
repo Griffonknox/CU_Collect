@@ -13,29 +13,53 @@
         <thead>
         <tr>
             <th>Date</th>
-            <th>Call Type</th>
             <th>Entered By</th>
-            <th>Loan #</th>
+            <th>Detail</th>
             <th>View</th>
         </tr>
         </thead>
         <tbody>
         {% for post in follow %}
         <tr>
-            <td>{{post.datEnteredDatetime}}</td>
-            <td>{{post.varCallType}}</td>
+            <td>{{post.dateEntered}}</td>
             <td>{{post.varEnteredBy}}</td>
-            <td>{{post.varLoanNo}}</td>
+            <td>{{post.txtDetails|truncate(100, True)}}</td>
             <td><button class="btn btn-sm btn-view follow_view" value="{{post.key}}" type="button" style="float: right;">View Followup</button></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
+
+
+<div class="col-xl-12 mt-5 mb-5 cell" id="table_short">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th style="width: 100px;">Date</th>
+            <th style="width: 100px;">Entered By</th>
+            <th style="width: 100px;">Delinquent</th>
+            <th>Detail</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in follow_recent %}
+        <tr>
+            <td style="font-size: 12px;">{{post[2]}}</td>
+            <td style="font-size: 12px;">{{post[3]}}</td>
+            <td style="font-size: 12px;">{{post[6]}}</td>
+            <td style="font-size: 12px;">{{post[4]}}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
 <script>
 $(document).ready(function() {
     $("#table_id").DataTable();
-    table_toggle ("table_toggle", "table_display");
+    table_toggle ("table_toggle", "table_display", "table_short");
     follow_view();
 <!--    modal_navigate();-->
 });

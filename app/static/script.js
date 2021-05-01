@@ -32,14 +32,16 @@ function formSubmit(onclick, form_id, location, display, modal_type) {
 };
 
 
-function table_toggle (onclick, table_id) {
+function table_toggle (onclick, table_id, table_alter) {
     $('.' + onclick).click(function() {
 
     if($("#" + table_id).css('display') == 'none')
     {
         $("#" + table_id).show();
+        $("#" + table_alter).hide();
     } else {
         $("#" + table_id).hide();
+        $("#" + table_alter).show();
     }
 
     });
@@ -140,4 +142,19 @@ function follow_view() {
           }
         });
     }));
+};
+
+function update_acct_detail() {
+
+    $('.acct_detail').click(function() {
+    var acct_id = this.name;
+        $.ajax({
+            url: "/update_acct_detail?acct_id=" + acct_id,
+            type: "POST",
+            data: $("#acct_detail").serialize(),
+            success: function(response) {
+                    alert(response)
+            }
+        });
+    });
 };

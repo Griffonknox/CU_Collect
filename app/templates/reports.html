@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CU Collect</title>
+    <title>Antigua</title>
     <link rel="icon" href="{{ url_for('static',filename='img/logo.png') }}" type="image/x-icon">
     {% include "addons.html" %}
 </head>
@@ -53,11 +53,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Date Range:</span>
                         </div>
-                        <input type="date" class="form-control" placeholder="From" name="from" >
+                        <input type="date" class="form-control" placeholder="From" name="from" disabled>
                           <div class="input-group-append">
                             <label class="input-group-text">-</label>
                           </div>
-                        <input type="date" class="form-control" placeholder="To" name="to" >
+                        <input type="date" class="form-control" placeholder="To" name="to" disabled>
                         <button class="btn btn-view report-search" type="button">Create Report</button>
 
                     </div>

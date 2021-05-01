@@ -37,22 +37,35 @@
         <div class="row">
             <div class="col-xl-6">
                 <p><b>Account #:</b> {{acct.varClientKey}}</p>
-                <p><b>Member Name:</b> {{acct.Acct_Name}}</p>
-                <p><b>Member Address:</b> {{acct.Acct_Address}}</p>
+                <p><b>Member Name:</b> {{acct.acct_name}}</p>
+                <p><b>Member Address:</b> {{acct.acct_address}}</p>
+                <p><b>Member Address 2:</b> {{acct.acct_address2}}</p>
+                <p><b>Member Phone:</b> {{acct.phone}}</p>
+                <p><b>Member Phone 2:</b> {{acct.phone2}}</p>
             </div>
 
-            <div class="col-xl-6">
-                <h5>Alert Status:</h5>
-                {% if alerts == "true" %}
-                <p><b>Categories:</b> {{alert.Alert_Cat}}</p>
-                <p><b>Entered By:</b> {{alert.varEnteredBy}}</p>
-                {% endif %}
+            <div class="col-xl-6 mb-3">
+<!--                <h5>Alert Status:</h5>-->
+<!--                {% if alerts == "true" %}-->
+<!--                <p><b>Categories:</b> {{alert.Alert_Cat}}</p>-->
+<!--                <p><b>Entered By:</b> {{alert.varEnteredBy}}</p>-->
+<!--                {% endif %}-->
+                <p>Account Detail:</p>
+                <form id="acct_detail" method="post" style="width: 100%; height: 80%;">
+                    <textarea name="acct_detail" style="width: 100%; height: 100%;">{{acct.detail}}</textarea>
+                </form>
             </div>
 
             <div class="col-xl-6">
                 <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="edit_account">Edit Account Info</button>
             </div>
-            <div class="col-xl-6">
+
+            <div class="col-xl-3">
+                <button class="btn btn-view acct_detail" type="button" name="{{acct.varClientKey}}">Update Member Detail</button>
+            </div>
+
+
+            <div class="col-xl-3">
                 {% if alerts == "true" %}
                 <button class="btn btn-view form_navigate" type="button" name="{{alert.key}}" value="view_alert">View Alert</button>
                 <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="create_alert">Create New Alert</button>
@@ -76,5 +89,6 @@
 <script>
 $(document).ready(function() {
     modal_param();
+    update_acct_detail();
 });
 </script>
