@@ -36,13 +36,13 @@
             <div class="row">
 
                 <div class="col-xl-7">
-                    <form id="acct-search" method="post" >
+                    <form id="acct-search" method="post" onkeypress="return event.keyCode != 13">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Account Number:</span>
                         </div>
-                        <input type="number" class="form-control" placeholder="Account Number" name="acct_num" required>
-                        <button class="btn btn-view acct-search" type="button">Search Account</button>
+                        <input type="number" class="form-control" id="acct_num" placeholder="Account Number" name="acct_num" required>
+                        <button class="btn btn-view acct-search" id="search_button" type="button">Search Account</button>
 
                     </div>
                     </form>
@@ -85,6 +85,13 @@
 $(document).ready(function() {
     formSubmit("acct-search", "acct-search", "search_account", "display", "none");
     modal_navigate();
+
+    $('#acct_num').keypress(function(e){
+
+    if(e.keyCode==13)
+    $('#search_button').click();
+
+    });
 });
 </script>
 </html>
