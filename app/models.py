@@ -15,7 +15,7 @@ Base = declarative_base(db_session)
 
 class Acct_memb(Base):
     __tablename__ = "memb_account"
-    varClientKey = Column(Integer(), primary_key=True)
+    varClientKey = Column(Integer(), primary_key=True, autoincrement=True)
     acct_name = Column(String(50))
     acct_address = Column(String(150))
     acct_address2 = Column(String(150))
@@ -27,7 +27,7 @@ class Acct_memb(Base):
 
 class Alert(Base):
     __tablename__ = "alert"
-    key = Column(Integer(), primary_key=True)
+    key = Column(Integer(), primary_key=True, autoincrement=True)
     varClientKey = Column(Integer())
     Alert_Cat = Column(String(20))
     varEnteredBy = Column(String(100))
@@ -37,7 +37,7 @@ class Alert(Base):
 
 class Follow_Up(Base):
     __tablename__ = "follow_up"
-    key = Column(Integer(), primary_key=True)
+    key = Column(Integer(), primary_key=True, autoincrement=True)
     varClientKey = Column(Integer())
     varEnteredBy = Column(String(100))
     dateEntered = Column(String(50))

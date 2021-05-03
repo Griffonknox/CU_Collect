@@ -57,23 +57,31 @@ def create_account_(num, name, address, phone):
 
 
 def create_follow(num, loan, detail, delq, user):
-
+    last_id = session.query(Follow_Up).order_by(Follow_Up.key.desc()).first()
+    session.close()
+    last_id = int(last_id.key) + 1
 
     logged_user = user  #include logged in value
     current_time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-    follow_create = Follow_Up(varClientKey=num, varEnteredBy=logged_user, delq_days=delq,
+    follow_create = Follow_Up(key=last_id, varClientKey=num, varEnteredBy=logged_user, delq_days=delq,
                               dateEntered=current_time, txtDetails=detail, varLoanNo=loan)
 
     session.add(follow_create)
     session.commit()
     session.close()
 
-def create_alert_(num, cat, detail):
-    logged_user = "tst"  # include logged in value
+def create_alert_(num, cat, detail, user):
+
+    last_id = session.query(Follow_Up).order_by(Follow_Up.key.desc()).first()
+    session.close()
+    last_id = int(last_id.key) + 1
+
+
+    logged_user = user
     current_time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-    alert_create = Alert(varClientKey=num, Alert_Cat=cat, varEnteredBy=logged_user,
+    alert_create = Alert(key=last_id, varClientKey=num, Alert_Cat=cat, varEnteredBy=logged_user,
                               dateEntered=current_time, Alert_Detail=detail)
 
     session.add(alert_create)

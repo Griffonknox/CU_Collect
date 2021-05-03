@@ -38,7 +38,7 @@ def log_out():
     return redirect(url_for("log_in"))
 
 
-@app.route('/home')
+@app.route('/home', methods=["GET", "POST"])
 @login_required
 def home():
     return render_template("home.html", user=current_user)
@@ -230,7 +230,7 @@ def view_alert():
 @app.route("/submit_alert", methods=["POST", "GET"])
 @login_required
 def submit_alert():
-    create_alert_(request.form["key"], request.form["alert_cat"], request.form["editordata"])
+    create_alert_(request.form["key"], request.form["alert_cat"], request.form["editordata"], user=current_user.username)
     return redirect(url_for("search_account", acct=request.form["key"]))
 
 
