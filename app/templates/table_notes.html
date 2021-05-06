@@ -23,7 +23,7 @@
         <tr>
             <td>{{post.dateEntered}}</td>
             <td>{{post.varEnteredBy}}</td>
-            <td>{{post.txtDetails|truncate(100, True)}}</td>
+            <td>{{post.txtDetails|truncate(100, True)|safe}}</td>
             <td><button class="btn btn-sm btn-view follow_view" value="{{post.key}}" type="button" style="float: right;">View Followup</button></td>
         </tr>
         {% endfor %}
@@ -48,7 +48,7 @@
             <td style="font-size: 12px;">{{post[3]}}</td>
             <td style="font-size: 12px;">{{post[2]}}</td>
             <td style="font-size: 12px;">{{post[6]}}</td>
-            <td style="font-size: 12px;">{{post[4]}}}</td>
+            <td style="font-size: 12px;">{{post[4] | safe}}</td>
         </tr>
         {% endfor %}
         </tbody>

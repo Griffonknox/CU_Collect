@@ -34,7 +34,7 @@
         </div>
         <div class="col-xl-12 cell">
 
-            <form id="report-form" method="post" >
+            <form id="report-form" method="post" onkeypress="return event.keyCode != 13">
             <div class="row">
 
                 <div class="col-xl-5">
@@ -43,7 +43,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Account Number:</span>
                             </div>
-                            <input type="number" class="form-control" placeholder="Account Number" name="acct_num" required>
+                            <input type="number" class="form-control" placeholder="Account Number" id="acct_num" name="acct_num" required>
                         </div>
 
                 </div>
@@ -53,12 +53,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Date Range:</span>
                         </div>
-                        <input type="date" class="form-control" placeholder="From" name="from" disabled>
+                        <input type="date" class="form-control" placeholder="From" name="from">
                           <div class="input-group-append">
                             <label class="input-group-text">-</label>
                           </div>
-                        <input type="date" class="form-control" placeholder="To" name="to" disabled>
-                        <button class="btn btn-view report-search" type="button">Create Report</button>
+                        <input type="date" class="form-control" placeholder="To" name="to">
+                        <button class="btn btn-view report-search" type="button" id="create_report">Create Report</button>
 
                     </div>
                 </div>
@@ -90,6 +90,13 @@
 $(document).ready(function() {
     formSubmit("report-search", "report-form", "search_report", "display", "none");
     modal_navigate();
+
+    $('#acct_num').keypress(function(e){
+
+    if(e.keyCode==13)
+    $('#create_report').click();
+
+    });
 });
 </script>
 </html>

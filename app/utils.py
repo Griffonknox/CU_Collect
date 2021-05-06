@@ -62,7 +62,7 @@ def create_follow(num, loan, detail, delq, user):
     last_id = int(last_id.key) + 1
 
     logged_user = user  #include logged in value
-    current_time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    current_time = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S")
 
     follow_create = Follow_Up(key=last_id, varClientKey=num, varEnteredBy=logged_user, delq_days=delq,
                               dateEntered=current_time, txtDetails=detail, varLoanNo=loan)
@@ -79,7 +79,7 @@ def create_alert_(num, cat, detail, user):
 
 
     logged_user = user
-    current_time = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    current_time = datetime.datetime.now().strftime("%m-%d-%Y %H:%M:%S")
 
     alert_create = Alert(key=last_id, varClientKey=num, Alert_Cat=cat, varEnteredBy=logged_user,
                               dateEntered=current_time, Alert_Detail=detail)

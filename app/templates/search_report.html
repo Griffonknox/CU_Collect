@@ -62,7 +62,7 @@
             <div class="col-xl-6">
                 {% if alert %}
                     <p><b>Alert Category:</b> {{alert.Alert_Cat}}</p>
-                    <p><b>Alert Detail:</b> <span class="dtl">{{alert.Alert_Detail}}</span></p>
+                    <p><b>Alert Detail:</b> <span class="dtl">{{alert.Alert_Detail|safe}}</span></p>
                 {% endif %}
             </div>
 
@@ -75,11 +75,11 @@
                     {% for f_ in follow  %}
                         <li class="mb-5">
                             <div class="row">
-                                <div class="col-xl-4"><b>Date:</b> {{f_.dateEntered}}</div>
-                                <div class="col-xl-4"><b>Entered By:</b> {{f_.varEnteredBy}}</div>
-                                <div class="col-xl-2"><b>Delinquent Days:</b> {{f_.delq_days}}</div>
-                                <div class="col-xl-2"><b>Loan #:</b> {{f_.varLoanNo}}</div>
-                                <div class="col-xl-12"><b>Detail:</b> <span class="dtl">{{f_.txtDetails}}</span></div>
+                                <div class="col-xl-4"><b>Date:</b> {{f_[3]}}</div>
+                                <div class="col-xl-4"><b>Entered By:</b> {{f_[2]}}</div>
+                                <div class="col-xl-2"><b>Delinquent Days:</b> {{f_[6]}}</div>
+                                <div class="col-xl-2"><b>Loan #:</b> {{f_[5]}}</div>
+                                <div class="col-xl-12"><b>Detail:</b> <span class="dtl">{{f_[4] | safe}}</span></div>
                             </div>
 <!--                            <p>-->
 <!--                                <span class="report_list"><b>Date:</b> {{f_.datEnteredDatetime}}; </span>-->

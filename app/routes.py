@@ -47,7 +47,7 @@ def home():
 
 """REPORTS SECTION"""
 
-@app.route('/reports')
+@app.route('/reports', methods=["GET", "POST"])
 @login_required
 def reports():
     return render_template("reports.html", user=current_user)
@@ -63,12 +63,21 @@ def search_report():
 
     if acct_query:
 
-        # query all followups by account number
-        follow_query = query_follow(acct_num, 0, "client")
+        # PUll all follow ups and sort by date range
+        date_from = request.form["from"]
+        date_to = request.form["to"]
 
-        # apply date filter
-        # date_from = request.form["from"]
-        # date_to = request.form["to"]
+        follow_query = pd.read_sql(session.query(Follow_Up).filter_by(varClientKey=acct_num).statement, session.bind)
+        session.close()
+
+        follow_query["dt_"] = pd.to_datetime(follow_query["dateEntered"])
+        mask = (follow_query["dt_"] > date_from) & (follow_query["dt_"] <= date_to)
+        follow_query = follow_query.loc[mask]
+        follow_query = follow_query.sort_values(by="dt_")
+        del follow_query["dt_"]
+        follow_query = follow_query.values.tolist()
+
+
 
         # query Alerts
         alert_query = query_alert(acct_num, 0, "client")  # consider to get descending
