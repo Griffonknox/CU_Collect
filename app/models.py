@@ -23,6 +23,15 @@ class Acct_memb(Base):
     phone2 = Column(String(20))
     detail = Column(String(1000))
 
+class Acct_loans(Base):
+    __tablename__ = "acct_loans"
+    key = Column(Integer(), primary_key=True, autoincrement=True)
+    varClientKey = Column(Integer())
+    loan_numb = Column(String(25))
+    acctnolnno = Column(Integer())
+    balance = Column(String(20))
+    varEnteredBy = Column(String(100))
+    dateEntered = Column(String(50))
 
 
 class Alert(Base):

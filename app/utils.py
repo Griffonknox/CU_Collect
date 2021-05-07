@@ -1,4 +1,4 @@
-from .models import session, Acct_memb, Alert, Follow_Up
+from .models import session, Acct_memb, Alert, Follow_Up, Acct_loans
 import datetime
 
 def query_account(clientkey, amount):
@@ -7,6 +7,15 @@ def query_account(clientkey, amount):
         session.close()
     elif amount != 1:
         acct = session.query(Acct_memb).filter_by(varClientKey=clientkey).all()
+        session.close()
+    return acct
+
+def query_loans(clientkey, amount):
+    if amount == 1:
+        acct = session.query(Acct_loans).filter_by(varClientKey=clientkey).first()
+        session.close()
+    elif amount != 1:
+        acct = session.query(Acct_loans).filter_by(varClientKey=clientkey).all()
         session.close()
     return acct
 

@@ -28,13 +28,17 @@
 
 
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-6">
         <h3>Account Information:</h3>
+    </div>
+
+    <div class="col-xl-6">
+        <span class="acct_toggle click_link" style="float: right;">(Toggle Acct Display)</span>
     </div>
 
     <div class="col-xl-12 cell">
 
-        <div class="row">
+        <div class="row" id="acct_alert">
             <div class="col-xl-6">
                 <p><b>Account #:</b> {{acct.varClientKey}}</p>
                 <p><b>Member Name:</b> {{acct.acct_name}}</p>
@@ -45,14 +49,10 @@
             </div>
 
             <div class="col-xl-6 mb-3">
-<!--                <h5>Alert Status:</h5>-->
-<!--                {% if alerts == "true" %}-->
-<!--                <p><b>Categories:</b> {{alert.Alert_Cat}}</p>-->
-<!--                <p><b>Entered By:</b> {{alert.varEnteredBy}}</p>-->
-<!--                {% endif %}-->
+
                 <p>Account Detail:</p>
                 <form id="acct_detail" method="post" style="width: 100%; height: 80%;">
-                    <textarea name="acct_detail" style="width: 100%; height: 100%;">{{acct.detail}}</textarea>
+                    <textarea name="acct_detail" style="width: 100%; height:200px;">{{acct.detail}}</textarea>
                 </form>
             </div>
 
@@ -77,6 +77,55 @@
 
         </div>
 
+        <div class="row" id="acct_loans" style="display:none;">
+            <div class="col-xl-6">
+                <p><b>Account #:</b> {{acct.varClientKey}}</p>
+                <p><b>Member Name:</b> {{acct.acct_name}}</p>
+                <p><b>Member Address:</b> {{acct.acct_address}}</p>
+                <p><b>Member Address 2:</b> {{acct.acct_address2}}</p>
+                <p><b>Member Phone:</b> {{acct.phone}}</p>
+                <p><b>Member Phone 2:</b> {{acct.phone2}}</p>
+            </div>
+
+            <div class="col-xl-6 mb-3">
+                <p>Acct Loan Information:</p>
+                <div style="height: 200px; overflow-y: auto;">
+                    <table class="table-sm table">
+                        <thead>
+                        <tr>
+                            <th>Loan Number</th>
+                            <th>AcctNoLnNo</th>
+                            <th>Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for loan in acct_loans %}
+                        <tr>
+                            <td>{{loan.loan_numb}}</td>
+                            <td>{{loan.acctnolnno}}</td>
+                            <td>{{loan.balance}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="edit_account">Edit Account Info</button>
+            </div>
+
+            <div class="col-xl-3">
+
+            </div>
+
+
+            <div class="col-xl-3">
+                <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="create_alert" style="float: right;">Add Loan</button>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -90,5 +139,6 @@
 $(document).ready(function() {
     modal_param();
     update_acct_detail();
+    acct_toggle("acct_toggle", "acct_alert", "acct_loans");
 });
 </script>

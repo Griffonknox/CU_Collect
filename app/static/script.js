@@ -48,6 +48,14 @@ function table_toggle (onclick, table_id, table_alter) {
 };
 
 
+function acct_toggle(onclick, show_id, hide_id) {
+    $('.' + onclick).click(function() {
+        $("#" + show_id).toggle();
+        $("#" + hide_id).toggle();
+    });
+}
+
+
 
 function modalLoad() {
 

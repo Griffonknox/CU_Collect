@@ -10,7 +10,12 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Loan #:</span>
           </div>
-          <input type="number" class="form-control" placeholder="Loan #" name="loan_num" max="1000" required>
+          <select class="form-control" name="loan_num">
+              <option value="all">All</option>
+              {% for loan in acct_loans %}
+              <option value="{{loan}}">{{loan}}</option>
+              {% endfor %}
+            </select>
         </div>
     </div>
 

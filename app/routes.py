@@ -1,7 +1,7 @@
 from app import app, login_manager
 from flask import render_template, redirect, url_for, request, flash
-from .models import session, Follow_Up, Acct_memb, Alert, User
-from .utils import query_alert, query_account, query_follow, create_account_, edit_acct, create_follow, create_alert_
+from .models import session, Follow_Up, Acct_memb, Alert, User, Acct_loans
+from .utils import query_alert, query_account, query_follow, create_account_, edit_acct, create_follow, create_alert_, query_loans
 from .config import verify_pass
 from flask_login import login_user, login_required, current_user
 import pandas as pd
@@ -93,7 +93,7 @@ def search_report():
 
 
 
-"""ACCOUNT CATEGORIES"""
+"""ACCOUNT SECTION"""
 
 
 @app.route("/search_account", methods=["POST", "GET"])
@@ -119,15 +119,19 @@ def search_account():
         follow_recent = follow_recent.sort_values('dateEntered', ascending=False)
         follow_recent = follow_recent.head(5)
 
+
+        #Search Loan information
+        acct_loans = query_loans(acct_num, 0)
+
         # query Alerts
         alert_query = query_alert(acct_num, 0, "client")  # consider to get descending
         if len(alert_query) != 0:
             flash("WARNING! ACCOUNT HAS ACTIVE ALERT(S)")
             return render_template("search_account.html", follow=follow_query, follow_recent=follow_recent.values.tolist(), alerts="true", acct=acct_query,
-                                   alert=alert_query[-1])
+                                   alert=alert_query[-1], acct_loans= acct_loans)
 
         else:
-            return render_template("search_account.html", follow=follow_query, follow_recent=follow_recent.values.tolist(), alerts="false", acct=acct_query)
+            return render_template("search_account.html", follow=follow_query, follow_recent=follow_recent.values.tolist(), alerts="false", acct=acct_query, acct_loans=acct_loans)
     else:
         return render_template("no_account.html")
 
@@ -198,7 +202,10 @@ def update_acct_detail():
 def create_followup():
     # pull form template and pass acct_num
     acct_num = request.args.get('key')
-    return render_template("create_followup.html", acct=acct_num)
+    acct_loans = pd.read_sql(session.query(Acct_loans).filter_by(varClientKey=acct_num).statement, session.bind)
+    session.close()
+    acct_loans = acct_loans["loan_numb"].unique()
+    return render_template("create_followup.html", acct=acct_num, acct_loans=acct_loans)
 
 
 @app.route("/view_followup", methods=["POST", "GET"])
