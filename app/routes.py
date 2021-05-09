@@ -1,9 +1,9 @@
 from app import app, login_manager
 from flask import render_template, redirect, url_for, request, flash
 from .models import session, Follow_Up, Acct_memb, Alert, User, Acct_loans
-from .utils import query_alert, query_account, query_follow, create_account_, edit_acct, create_follow, create_alert_, query_loans
+from .utils import query_alert, query_account, query_follow, create_account_, edit_acct, create_follow, create_alert_, query_loans, create_loan_
 from .config import verify_pass
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 import pandas as pd
 
 
@@ -35,6 +35,7 @@ def authenticate_user():
 @app.route('/log_out')
 @login_required
 def log_out():
+    logout_user()
     return redirect(url_for("log_in"))
 
 
@@ -152,7 +153,9 @@ def submit_account():
     acct_query = query_account(account_num, 0)
 
     if len(acct_query) == 0:
-        create_account_(account_num, request.form["memb_name"], request.form["memb_address"], request.form["memb_phone"])
+        create_account_(account_num, request.form["first_name"], request.form["middle_name"],  request.form["last_name"],
+                        request.form["phys_address"],request.form["phys_state"],request.form["phys_city"],request.form["phys_zip"], request.form["memb_phone"])
+
         flash("Account {} Successfully Made.".format(account_num))
         return redirect(url_for("home"))
 
@@ -174,8 +177,9 @@ def edit_account():
 @login_required
 def edit_acct_submit():
     # query item, need to pull id number to query first
-    acct_query = edit_acct(request.form["account_num"], request.form["memb_name"], request.form["memb_address"],
-                           request.form["memb_address2"], request.form["memb_phone"], request.form["memb_phone2"])  # edit acct and return
+    acct_query = edit_acct(request.form["account_num"], request.form["first_name"], request.form["middle_name"], request.form["last_name"], request.form["phys_address"],
+                           request.form["phys_city"], request.form["phys_state"], request.form["phys_zip"], request.form["mail_address"],
+                           request.form["mail_city"], request.form["mail_state"], request.form["mail_zip"],request.form["memb_phone"], request.form["memb_phone2"])  # edit acct and return
 
     return redirect(url_for("search_account", acct=acct_query.varClientKey))
 
@@ -196,13 +200,25 @@ def update_acct_detail():
     return "Member Detail Successfully Update"
 
 
+"""ALL LOANS CATEGORIES"""
+@app.route("/add_loan", methods=["GET", "POST"])
+@login_required
+def add_loan():
+    acct_num = request.form["acct_num"]
+    create_loan_(acct_num, request.form["loan_numb"], request.form["acctnolnno"], request.form["balance"], current_user.username)
+
+    return redirect(url_for("search_account", acct=acct_num))
+
+
+
+
 """FOLLOW UP CATEGORIES"""
 @app.route("/create_followup", methods=["POST", "GET"])
 @login_required
 def create_followup():
     # pull form template and pass acct_num
     acct_num = request.args.get('key')
-    acct_loans = pd.read_sql(session.query(Acct_loans).filter_by(varClientKey=acct_num).statement, session.bind)
+    acct_loans = pd.read_sql(session.query(Acct_loans).filter_by(varClientKey=acct_num).statement, session.bind) # get loans of acct
     session.close()
     acct_loans = acct_loans["loan_numb"].unique()
     return render_template("create_followup.html", acct=acct_num, acct_loans=acct_loans)

@@ -10,36 +10,70 @@
           <div class="input-group-prepend">
             <span class="input-group-text login-width">Account #:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Account #" name="account_num" id="key">
+          <input type="number" class="form-control" placeholder="Account #" name="account_num" id="key">
         </div>
     </div>
 
     <div class="col-xl-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text">Member Name:</span>
+            <span class="input-group-text">First Name:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Name" name="memb_name" id="name" maxlength="50">
-        </div>
-    </div>
-
-
-
-    <div class="col-xl-6">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Member Address:</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Member Address" name="memb_address" id="address" maxlength="150">
+          <input type="text" class="form-control" maxlength="50" placeholder="First Name" name="first_name" id="first_name">
         </div>
     </div>
 
     <div class="col-xl-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text">Member Address 2:</span>
+            <span class="input-group-text">Middle Name:</span>
           </div>
-          <input type="text" class="form-control" placeholder="Member Address" name="memb_address2" id="address2" maxlength="150">
+          <input type="text" class="form-control" maxlength="50" placeholder="Middle Name" name="middle_name" id="middle_name">
+        </div>
+    </div>
+
+        <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Last Name:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Last Name" name="last_name" id="last_name">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Physical Address:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Physical Address" name="phys_address" id="phys_address">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Physical City:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Physical City" name="phys_city" id="phys_city">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Physical State:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Physical State" name="phys_state" id="phys_state">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Physical Zip:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Physical Zip" name="phys_zip" id="phys_zip">
         </div>
     </div>
 
@@ -48,18 +82,55 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Phone:</span>
           </div>
-          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone" name="memb_phone" id="phone">
+          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone" name="memb_phone" id="memb_phone">
         </div>
     </div>
 
     <div class="col-xl-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text">Phone 2:</span>
+            <span class="input-group-text">Phone2:</span>
           </div>
-          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone" name="memb_phone2" id="phone2">
+          <input type="text" class="form-control" maxlength="20" placeholder="Member Phone2" name="memb_phone2" id="memb_phone2">
         </div>
     </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Mail Address:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Mail Address" name="mail_address" id="mail_address">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Mail City:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Mail City" name="mail_city" id="mail_city">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Mail State:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Mail State" name="mail_state" id="mail_state">
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Mail Zip:</span>
+          </div>
+          <input type="text" class="form-control" maxlength="50" placeholder="Mail Zip" name="mail_zip" id="mail_zip">
+        </div>
+    </div>
+
 
     <input type="hidden" value="edit" name="edit">
 
@@ -74,10 +145,18 @@ $(document).ready(function() {
     formSubmit("account_edit", "edit_account", "edit_acct_submit", "display", "off");
 
     $("#key").val("{{acct.varClientKey}}");
-    $("#name").val("{{acct.acct_name}}");
-    $("#address").val("{{acct.acct_address}}");
-    $("#address2").val("{{acct.acct_address2}}");
-    $("#phone").val("{{acct.phone}}");
-    $("#phone2").val("{{acct.phone2}}");
+    $("#first_name").val("{{acct.first_name}}");
+    $("#middle_name").val("{{acct.middle_name}}");
+    $("#last_name").val("{{acct.last_name}}");
+    $("#phys_address").val("{{acct.phys_address}}");
+    $("#phys_city").val("{{acct.phys_city}}");
+    $("#phys_state").val("{{acct.phys_state}}");
+    $("#phys_zip").val("{{acct.phys_zip}}");
+    $("#memb_phone").val("{{acct.phone}}");
+    $("#memb_phone2").val("{{acct.phone2}}");
+    $("#mail_address").val("{{acct.mail_address}}");
+    $("#mail_city").val("{{acct.mail_city}}");
+    $("#mail_state").val("{{acct.mail_state}}");
+    $("#mail_zip").val("{{acct.mail_zip}}");
 });
 </script>

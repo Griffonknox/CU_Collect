@@ -41,9 +41,9 @@
         <div class="row" id="acct_alert">
             <div class="col-xl-6">
                 <p><b>Account #:</b> {{acct.varClientKey}}</p>
-                <p><b>Member Name:</b> {{acct.acct_name}}</p>
-                <p><b>Member Address:</b> {{acct.acct_address}}</p>
-                <p><b>Member Address 2:</b> {{acct.acct_address2}}</p>
+                <p><b>Member Name:</b> {{acct.first_name}} {{acct.middle_name}} {{acct.last_name}}</p>
+                <p><b>Physical Address:</b> {{acct.phys_address}} {{acct.phys_city}} <br> {{acct.phys_state}} {{acct.phys_zip}}</p>
+                <p><b>Mail Address:</b> {{acct.mail_address}} {{acct.mail_city}} <br> {{acct.mail_state}} {{acct.mail_zip}}</p>
                 <p><b>Member Phone:</b> {{acct.phone}}</p>
                 <p><b>Member Phone 2:</b> {{acct.phone2}}</p>
             </div>
@@ -80,9 +80,9 @@
         <div class="row" id="acct_loans" style="display:none;">
             <div class="col-xl-6">
                 <p><b>Account #:</b> {{acct.varClientKey}}</p>
-                <p><b>Member Name:</b> {{acct.acct_name}}</p>
-                <p><b>Member Address:</b> {{acct.acct_address}}</p>
-                <p><b>Member Address 2:</b> {{acct.acct_address2}}</p>
+                <p><b>Member Name:</b> {{acct.first_name}} {{acct.middle_name}} {{acct.last_name}}</p>
+                <p><b>Physical Address:</b> {{acct.phys_address}} {{acct.phys_city}} <br> {{acct.phys_state}} {{acct.phys_zip}}</p>
+                <p><b>Mail Address:</b> {{acct.mail_address}} {{acct.mail_city}} <br> {{acct.mail_state}} {{acct.mail_zip}}</p>
                 <p><b>Member Phone:</b> {{acct.phone}}</p>
                 <p><b>Member Phone 2:</b> {{acct.phone2}}</p>
             </div>
@@ -90,6 +90,7 @@
             <div class="col-xl-6 mb-3">
                 <p>Acct Loan Information:</p>
                 <div style="height: 200px; overflow-y: auto;">
+                    <form method="post" id="loan_form">
                     <table class="table-sm table">
                         <thead>
                         <tr>
@@ -106,8 +107,17 @@
                             <td>{{loan.balance}}</td>
                         </tr>
                         {% endfor %}
+
+                        <tr>
+                                <input type="hidden" name="acct_num" value="{{acct.varClientKey}}">
+                                <td><input type="text" placeholder="Loan Number" maxlength="25" name="loan_numb" required></td>
+                                <td><input type="number" placeholder="AcctNoLnNo" name="acctnolnno" required></td>
+                                <td><input type="test" placeholder="Balance" maxlength="20" name="balance" required></td>
+                        </tr>
+
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
 
@@ -121,7 +131,7 @@
 
 
             <div class="col-xl-3">
-                <button class="btn btn-view form_navigate" type="button" name="{{acct.varClientKey}}" value="create_alert" style="float: right;">Add Loan</button>
+                <button class="btn btn-view loan_submit" type="button" name="{{acct.varClientKey}}" value="add_loan" style="float: right;">Add Loan</button>
             </div>
 
         </div>
@@ -140,5 +150,6 @@ $(document).ready(function() {
     modal_param();
     update_acct_detail();
     acct_toggle("acct_toggle", "acct_alert", "acct_loans");
+    formSubmit("loan_submit", "loan_form", "add_loan", "display", "none");
 });
 </script>

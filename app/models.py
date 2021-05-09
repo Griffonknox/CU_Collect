@@ -16,9 +16,20 @@ Base = declarative_base(db_session)
 class Acct_memb(Base):
     __tablename__ = "memb_account"
     varClientKey = Column(Integer(), primary_key=True, autoincrement=True)
-    acct_name = Column(String(50))
-    acct_address = Column(String(150))
-    acct_address2 = Column(String(150))
+    first_name = Column(String(100))
+    middle_name = Column(String(100))
+    last_name = Column(String(100))
+
+    phys_address = Column(String(50))
+    phys_city = Column(String(50))
+    phys_state = Column(String(50))
+    phys_zip = Column(String(50))
+
+    mail_address = Column(String(50))
+    mail_city = Column(String(50))
+    mail_state = Column(String(50))
+    mail_zip = Column(String(50))
+
     phone = Column(String(20))
     phone2 = Column(String(20))
     detail = Column(String(1000))
