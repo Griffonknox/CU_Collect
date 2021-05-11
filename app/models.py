@@ -76,7 +76,7 @@ def get_user(userid):
 
 
 class User(Base, UserMixin):
-    __tablename__ = "user"
+    __tablename__ = "usr"
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(30))
     password = Column(String(30))
