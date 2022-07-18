@@ -1,6 +1,9 @@
 /app/config.py
 .idea/*
 Data/*
+web.config
+web.config2
+wfastcgi.py
 
 
 

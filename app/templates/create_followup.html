@@ -40,7 +40,13 @@
 <script>
 $(document).ready(function() {
 
-$('#text_edit').cleditor();
+    $('#text_edit').cleditor();
   formSubmit("followup_submit", "followup_form", "followup_submit", "display", "off");
+
+$( $(".cleditorMain iframe")[0].contentWindow.document ).on("cut copy paste",function(e) {
+      e.preventDefault();
+   });
+
+
 });
 </script>
